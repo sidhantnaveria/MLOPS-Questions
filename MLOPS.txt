@@ -2,7 +2,6 @@ Q1:   How many ways do you know to implement MLOps?
 
 Answer
 There are three ways you can go about implementing MLOps:
-
 MLOps level 0 (Manual process): in this level, every step is manual, including data analysis, data preparation, model training, and validation. It requires manual execution of each step and manual transition from one step to another. The assumption is that your data science team manages a few models that don’t change frequently, consequently, there is no Continuous Integration (CI) and Continuous Deployment (CD) and usually, testing the code is part of the notebooks or script execution and the deployment is done in a microservice with REST API.
 
 MLOps level 1 (ML pipeline automation): The goal here is to perform continuous training (CT) of the model by automating the ML pipeline. This way, you achieve continuous delivery of model prediction service. One main characteristic here is we deploy a whole training pipeline, so the model is automatically trained in production, using fresh data based on live pipeline triggers.
@@ -12,8 +11,8 @@ In the CI stage you build source code and run various tests. The outputs of this
 In the CD stage you deploy the artefacts produced by the CI stage to the target environment. The output of this stage is a deployed pipeline with the new implementation of the model.
 However, the data and model analysis step is still a manual process for data scientists before the pipeline starts a new iteration of the experiment.
 
+
 Q2:   What's the difference between Static Deployment and Dynamic Deployment?  
-Add to PDF   Junior 
 Answer
 In the Static Deployment, the model is trained offline. That is, we train the model exactly once and then use that trained model for a while. The model training is done on the local machine and once the model is complete, it is saved and transferred to the server to make live predictions. The model is packaged into installable application software and then deployed. For example, an application that offers batch-scoring of requests.
 
@@ -21,14 +20,12 @@ In the Dynamic Deployment, the model is trained online. That is, data is continu
 
 
 Q3:   What production Testing methods do you know?  
-Add to PDF   Junior 
 Answer
 Batch testing: validates the model by performing testing in an environment that is different from its training environment. Batch testing is carried out on a set of samples of data to test model inference using metrics of choice, such as accuracy, RMSE, etc. Batch testing can be done in various types of computes, for example, in the cloud, or on a remote server or a test server. The model is usually served as a serialized file, and the file is loaded as an object and inferred on test data.
 
 A/B testing: It is often used in service design (websites, mobile apps, and so on) and for assessing marketing campaigns. To evaluate the results of A/B testing, statistical techniques are used based on the business or operations to determine which model will perform better in production. A/B testing is usually conducted in this manner:
 
-Real-time or live data is fragmented or split into two sets, Set A and Set B.
-Set A data is routed to the old model, and Set B data is routed to the new model.
+Real-time or live data is fragmented or split into two sets, Set A and Set B.Set A data is routed to the old model, and Set B data is routed to the new model.
 In order to evaluate whether the new model (model B) performs better than the old model (model A), various statistical techniques can be used to evaluate model performance (for example, accuracy, precision, etc), depending on the business use case or operations.
 Then, we use statistical hypothesis testing: The null hypothesis asserts that the new model does not increase the average value of the monitoring business metrics. The alternate hypothesis asserts that the new model improves the average value of the monitoring business metrics.
 Ultimately, we evaluate whether the new model drives a significant boost in specific business metrics.
@@ -47,7 +44,6 @@ However, extra infrastructure is needed to maintain data streams (Kafka, Kinesis
 
 
 Q5:   What is Training-Serving Skew?  
-Add to PDF   Junior 
 Answer
 
 Training-serving skew is a difference between performance during training and performance during serving. This skew can be caused by:
@@ -57,13 +53,9 @@ A change in the data between when you train and when you serve.
 A feedback loop between your model and your algorithm.
 The first two bullets above are also known as data drift or covariate shift. The feedback loop problem mentioned in the third bullet point has to be addressed by proper ML system design.
 
-
-
 A Model Registry is a central repository that allows model developers to publish production-ready models for ease of access. With the registry, developers can also work together with other teams and stakeholders, and collaboratively manage the lifecycle of all models in the organization.
 
 A data scientist can push trained models to the model registry. Once in the registry, the models are ready to be tested, validated, and deployed to production in a workflow that is similar to the one below:
-
-
 
 This tool bridges the gap between experiment and production activities. This results in a faster rollout of production models. In addition, model registries store trained models for fast and easy retrieval by any integrated application or service. So, software engineers and reviewers can easily identify and select only the best version of the trained models (based on the evaluation metrics), so the model can be tested, reviewed, and released to production.
 
