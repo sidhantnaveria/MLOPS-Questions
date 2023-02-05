@@ -1,0 +1,180 @@
+Q1:   How many ways do you know to implement MLOps?  
+
+Answer
+There are three ways you can go about implementing MLOps:
+
+MLOps level 0 (Manual process): in this level, every step is manual, including data analysis, data preparation, model training, and validation. It requires manual execution of each step and manual transition from one step to another. The assumption is that your data science team manages a few models that don’t change frequently, consequently, there is no Continuous Integration (CI) and Continuous Deployment (CD) and usually, testing the code is part of the notebooks or script execution and the deployment is done in a microservice with REST API.
+
+MLOps level 1 (ML pipeline automation): The goal here is to perform continuous training (CT) of the model by automating the ML pipeline. This way, you achieve continuous delivery of model prediction service. One main characteristic here is we deploy a whole training pipeline, so the model is automatically trained in production, using fresh data based on live pipeline triggers.
+
+MLOps level 2 (CI/CD pipeline automation): is a step further from MLOps level 1. The goal is to get a rapid and reliable update of pipelines in production, and for that, you need a robust automated CI/CD system:
+In the CI stage you build source code and run various tests. The outputs of this stage are pipeline components (packages, executables, and artefacts) to be deployed in a later stage.
+In the CD stage you deploy the artefacts produced by the CI stage to the target environment. The output of this stage is a deployed pipeline with the new implementation of the model.
+However, the data and model analysis step is still a manual process for data scientists before the pipeline starts a new iteration of the experiment.
+
+Q2:   What's the difference between Static Deployment and Dynamic Deployment?  
+Add to PDF   Junior 
+Answer
+In the Static Deployment, the model is trained offline. That is, we train the model exactly once and then use that trained model for a while. The model training is done on the local machine and once the model is complete, it is saved and transferred to the server to make live predictions. The model is packaged into installable application software and then deployed. For example, an application that offers batch-scoring of requests.
+
+In the Dynamic Deployment, the model is trained online. That is, data is continually entering the system and we're incorporating that data into the model through continuous updates, this means that you predict on demand, using a server. The model is then deployed using a web framework like FastAPI or Flask and is offered as an API endpoint that responds to user requests.
+
+
+Q3:   What production Testing methods do you know?  
+Add to PDF   Junior 
+Answer
+Batch testing: validates the model by performing testing in an environment that is different from its training environment. Batch testing is carried out on a set of samples of data to test model inference using metrics of choice, such as accuracy, RMSE, etc. Batch testing can be done in various types of computes, for example, in the cloud, or on a remote server or a test server. The model is usually served as a serialized file, and the file is loaded as an object and inferred on test data.
+
+A/B testing: It is often used in service design (websites, mobile apps, and so on) and for assessing marketing campaigns. To evaluate the results of A/B testing, statistical techniques are used based on the business or operations to determine which model will perform better in production. A/B testing is usually conducted in this manner:
+
+Real-time or live data is fragmented or split into two sets, Set A and Set B.
+Set A data is routed to the old model, and Set B data is routed to the new model.
+In order to evaluate whether the new model (model B) performs better than the old model (model A), various statistical techniques can be used to evaluate model performance (for example, accuracy, precision, etc), depending on the business use case or operations.
+Then, we use statistical hypothesis testing: The null hypothesis asserts that the new model does not increase the average value of the monitoring business metrics. The alternate hypothesis asserts that the new model improves the average value of the monitoring business metrics.
+Ultimately, we evaluate whether the new model drives a significant boost in specific business metrics.
+Stage test or shadow test: Before deploying a model for production, the model is tested in a replicated production-like environment (staging environment). This is especially important for testing the robustness of the model and assessing its performance on real-time data. Is done by deploying the develop branch or a model to be tested on a staging server and inferring the same data as the production pipeline. The only shortcoming here will be that end-users will not see the results of the develop branch or business decisions will not be made in the staging server. The results of the staging environment will statistically be evaluated using suitable metrics to determine the robustness and performance of the model.
+
+Batch and stream processing are two techniques that allow us to have control over the features that we use to generate our real-time predictions.
+
+Batch process features for a given entity at a previous point in time, which are later used for generating real-time predictions.
+
+Here we can perform heavy feature computations offline and have it ready for fast inference.
+However, features can become stale since they were predetermined a while ago. This can be a huge disadvantage when your prediction depends on very recent events. (ex. catching fraudulent transactions as quickly as possible).
+In Stream Processing the inference is performed on a given set of inputs with near real-time, streaming, features for a given entity.
+
+Here we can generate better predictions by providing real-time, streaming, features to the model.
+However, extra infrastructure is needed to maintain data streams (Kafka, Kinesis, etc.) and for stream processing (Apache Flink, Beam, etc.)
+
+
+Q5:   What is Training-Serving Skew?  
+Add to PDF   Junior 
+Answer
+
+Training-serving skew is a difference between performance during training and performance during serving. This skew can be caused by:
+
+A discrepancy between how you handle data in the training and serving pipelines.
+A change in the data between when you train and when you serve.
+A feedback loop between your model and your algorithm.
+The first two bullets above are also known as data drift or covariate shift. The feedback loop problem mentioned in the third bullet point has to be addressed by proper ML system design.
+
+
+
+A Model Registry is a central repository that allows model developers to publish production-ready models for ease of access. With the registry, developers can also work together with other teams and stakeholders, and collaboratively manage the lifecycle of all models in the organization.
+
+A data scientist can push trained models to the model registry. Once in the registry, the models are ready to be tested, validated, and deployed to production in a workflow that is similar to the one below:
+
+
+
+This tool bridges the gap between experiment and production activities. This results in a faster rollout of production models. In addition, model registries store trained models for fast and easy retrieval by any integrated application or service. So, software engineers and reviewers can easily identify and select only the best version of the trained models (based on the evaluation metrics), so the model can be tested, reviewed, and released to production.
+
+In addition, the Model registry simplifies model lifecycle management in the following way:
+
+Register, track, and version your trained, deployed, and retired models in a central repository that is organized and searchable.
+Store the metadata for your trained models, as well as their runtime dependencies so the deployment process is eased.
+Build automated pipelines that make continuous integration, delivery, and training of your production model possible.
+Compare models running in production (champion models) to freshly trained models (or challenger models) in the staging environment.
+
+
+
+Q6 What is the difference between MLOps, ModelOps & AIOps
+
+MLOps is an application of DevOps in building end-to-end Machine Learning algorithms including - Data Collection, Data Pre-processing, Model Building, Model Deployment in Production, Monitoring Model in Production, and Model Periodic Upgradation.
+ModelOps is the application of DevOps in handling end to end implementation of any algorithms such as Rule-Based Models. This is a more generic term used
+AIOps is building AI applications end to end using DevOps concepts
+
+
+Q7 Define MLOps and how is it different from Data Science?
+
+MLOps is a profession where the entire lifecycle including the deployment and monitoring in production is performed seamlessly. This also means that the Data Science workforce with MLOps skills will be more preferred and this will be the way forward for scaling up the career ladder & earn lucrative salaries that are much higher than typical Data Scientists. 
+
+
+Q8 What is the difference between MLOps and DevOps?
+
+MLOps & DevOps have a lot of things in common. However, DevOps include developing and deploying the software application code in production and this code is usually static and does not change rapidly.
+
+MLOps on the other side also includes developing and deploying the ML code in production. However, here the data changes rapidly and the up-gradation of models has to happen more frequently than typical software application code
+
+
+Q9 What are the risks associated with Data Science & how MLOps can overcome the same?
+Data Science typically has the following issues:
+
+Model goes down without an alert and becomes unavailable
+Model gives incorrect predictions for a given observation that cannot be scrutinized further
+Model accuracy decreases further as and how time progresses
+Model maintenance also should be done by data scientists, who are expensive
+Model scaling across the organization is not easy
+These risks can be addressed by using MLOps.
+
+Q10 How do you create infrastructure for MLOps?
+
+There are many different ways in which MLOps infrastructure can be created. The core responsibility typically lies outside of the scope of an MLOps engineer. However, for a given set of existing environments, the MLOps engineer can definitely create a tech stack that can be best suited for hosting a successful machine learning platform. For example, if the enterprise has a predominantly AWS-based infrastructure, then it becomes easy to implement MLOps pipelines utilizing AWS Sagemaker framework in conjunction with services like Sagemaker pipelines, Cloudformation, Lambdas for orchestration and Infrastructure as Code. If the enterprise is open, then the best platform for most modern software development firms is leaning towards a Kubernetes (k8s) powered infrastructure. This also enables the ML engineer to adopt Kubeflow which is quickly becoming the de facto MLOps framework of choice for many ML practitioners. However, creating an infrastructure exclusively for ML models is generally not within the scope of an ML Engineer.
+
+Q11 How to create CI/CD pipelines for machine learning?
+
+CI stands for continuous integration and CD stands for continuous deployment. The fundamental feature of having a CI/CD pipeline is to ensure that data scientists and software engineering teams are able to create and deploy error-free code as quickly as possible.
+
+Specifically, a CI/CD pipeline aims to automate and streamline the software deployment process which includes - building code, running tests and deploying new versions of model/application when there are updates/revisions.
+
+CI/CD for machine learning has an added complexity in terms of including data in addition to code. But, it could be achieved through a variety of tools depending on the technical stack the enterprise is using.
+
+If the technical stack is primarily AWS driven, Sagemaker pipelines can stand in for CI/CD pipelines.
+
+Other approaches could be to use Kubeflow pipelines and traditional tools like Jenkins or even Github actions to build CI/CD pipelines.
+
+
+Q12 Explain about model/concept drift.
+
+Model drift, sometimes called concept drift, occurs when the model performance during the inference phase (using real-world data) degrades when compared to its performance during the training phase (using historical, labeled data). It is also known as train/serve skew as the performance of the model is skewed when compared with the training and serving phases. This could be due to many reasons like
+
+The underlying distribution of data has changed
+Unforeseen events - like a model trained on pre-covid data is expected to perform much worse on data during the COVID-19 pandemic
+Training happened on a limited number of categories but a recent environmental change happened which added another category
+In NLP problems the real world data has significantly more number of tokens that are different from training data
+To detect model drift, it is always necessary to keep continuously monitoring the performance of the model. If there is a sustained degradation of model performance, the cause needs to be investigated and treatment methods need to be applied accordingly which almost always involves model retraining.
+
+
+Q13 Can you explain what a pipeline is in context with MLOps?
+
+A pipeline is a series of steps or stages that data must go through in order to be processed. In the context of MLOps, a pipeline is typically used to refer to the process of taking data from its raw form and preparing it for use in machine learning models. This can involve a number of steps, such as data cleaning, feature engineering, and data transformation.
+
+
+
+Q14 What’s the difference between continuous integration, delivery, and deployment?
+Continuous integration is the practice of merging all developer working copies with a shared mainline several times a day. Continuous delivery is the practice of building and testing code changes in a non-production environment before merging them into the production environment. Continuous deployment is the practice of automatically deploying code changes to the production environment as soon as they are merged into the mainline.
+
+Q15 How does monitoring differ from logging?
+
+Monitoring is the process of observing the performance of a system in order to identify issues and trends. Logging, on the other hand, is the process of recording information about the system in a log file. Monitoring can be used to detect issues that may not be apparent from the log files, and it can also be used to identify trends that may be indicative of future problems.
+
+Q16 Describe some common issues involved in the deployment of machine learning models.
+
+Some common issues involved in the deployment of machine learning models include:
+– Ensuring that the model is able to run in the production environment
+– Managing model versions and dependencies
+– Automating model training and deployment
+– Monitoring model performance in production
+– Handling data drift
+
+Q17 How often should we retrain a model if it’s being used for real-time predictions?
+
+The answer to this question will depend on a number of factors, including how accurate the model needs to be and how quickly the data is changing. In general, you will want to retrain your model more frequently if the data is changing quickly or if accuracy is critical.
+
+Q18 How can we ensure reproducibility when deploying machine learning models?
+
+There are a few key things that need to be done in order to ensure reproducibility when deploying machine learning models. First, it is important to keep track of all of the steps that were taken during the training process, so that they can be replicated exactly. Second, the environment in which the model is deployed should be as similar as possible to the environment in which it was trained. Finally, it is also important to keep track of the model’s performance over time, so that any changes can be detected and addressed.
+
+Q19 What is the concept of “immutable infrastructure”?
+
+The concept of immutable infrastructure is that your infrastructure should be treated as immutable, or unchangeable. This means that once you have deployed your infrastructure, you should not make any changes to it. If you need to make a change, you should deploy a new version of your infrastructure. This approach can help to prevent configuration drift and can make it easier to manage your infrastructure.
+
+
+Q20 What is your opinion on the A/B split approach to model evaluation?
+
+I think that the A/B split approach is a great way to evaluate models because it allows you to compare the performance of two models side-by-side. This can be especially helpful when you are trying to decide between two different models and you want to see which one performs better on a specific metric.
+
+
+Q21 What is the difference between an experiment and a hypothesis?
+
+An experiment is a test or series of tests that is conducted in order to verify or disprove a hypothesis. A hypothesis is a proposed explanation for a phenomenon.
+
+
